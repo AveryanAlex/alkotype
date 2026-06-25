@@ -95,7 +95,7 @@
 					</h1>
 					<p class="mt-5 max-w-3xl text-lg leading-8 text-zinc-300">
 						Type as fast as possible. Exact spelling is optional; the prototype rewards text that
-						stays close to the original by whole-text similarity, rough 10-word chunks, and
+						stays close to the original by whole-text similarity, source-guided chunks, and
 						meaningful content words.
 					</p>
 				</div>
@@ -104,9 +104,9 @@
 				>
 					<p class="font-semibold text-amber-200">MVP scoring note</p>
 					<p class="mt-2 leading-6">
-						This first app is fully static and uses local fuzzy text scoring. The Kanban plan splits
-						out the real semantic scorer as a follow-up: embeddings for sentence chunks, whole text,
-						and non-short words.
+						Live gameplay stays fully static and uses deterministic fallback scoring. The scoring
+						subsystem now has an optional semantic-provider API for whole-text and chunk embeddings,
+						but no provider is configured by default.
 					</p>
 				</div>
 			</div>
