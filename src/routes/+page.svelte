@@ -487,7 +487,9 @@
 									<p class="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">
 										Similarity
 									</p>
-									<p class="mt-1 text-3xl font-black">{formatPercent(result.score.overall)}</p>
+									<p class="mt-1 text-3xl font-black" data-testid="similarity-value">
+										{formatPercent(result.score.overall)}
+									</p>
 									<p class="mt-2 text-xs leading-5 text-zinc-500">
 										Overall closeness to the prompt.
 									</p>
@@ -496,7 +498,9 @@
 									<p class="text-xs font-black uppercase tracking-[0.2em] text-zinc-700">
 										Effective WPM
 									</p>
-									<p class="mt-1 text-3xl font-black">{formatNumber(result.score.effectiveWpm)}</p>
+									<p class="mt-1 text-3xl font-black" data-testid="effective-wpm-value">
+										{formatNumber(result.score.effectiveWpm)}
+									</p>
 									<p class="mt-2 text-xs leading-5 text-zinc-700">
 										Raw speed multiplied by meaning.
 									</p>
