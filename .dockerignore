@@ -1,6 +1,8 @@
 node_modules
 .svelte-kit
 build
+playwright-report
+test-results
 .git
 .env
 .env.*

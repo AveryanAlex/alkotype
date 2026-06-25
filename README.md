@@ -11,26 +11,60 @@ The product promise is simple: players type fast, mistakes are allowed, and the 
 - Static adapter with SPA fallback (`build/200.html`)
 - Pure scoring subsystem in `src/lib/scoring`
 - Vitest unit tests for deterministic fallback and mocked semantic scoring
+- Playwright smoke test against the built static app preview
 - Nginx Dockerfile for static hosting
 
-## Commands
+## Local Development
 
 ```sh
 npm install
 npm run dev
+```
+
+Then open <http://localhost:5173>.
+
+## Checks And Tests
+
+```sh
 npm run check
+npm run lint
+npm run test:unit
+npm run test:e2e
 npm run test
 npm run build
+```
+
+`npm run test` runs the unit suite first, then the Playwright smoke test. The Playwright config builds the static app and serves it with `npm run preview` before launching Chromium, so the smoke exercises the generated SvelteKit output rather than the dev server.
+
+After the first install on a machine without Playwright browsers, run:
+
+```sh
+npx playwright install chromium
+```
+
+If Linux browser dependency checks fail on a fresh host, install the OS dependencies with:
+
+```sh
+npx playwright install --with-deps chromium
 ```
 
 ## Static Docker image
 
 ```sh
-docker build -t alkotype .
-docker run --rm -p 8080:80 alkotype
+docker build -t alkotype:local .
+docker run --rm -p 8080:80 alkotype:local
 ```
 
 Then open <http://localhost:8080>.
+
+The image serves the static `build/` output from `/usr/share/nginx/html` with an SPA fallback to `/200.html`. Quick HTTP smoke checks:
+
+```sh
+curl -I http://localhost:8080/
+curl -I http://localhost:8080/any/client/route
+```
+
+Both responses should be `HTTP/1.1 200 OK` from the running container.
 
 ## Scoring subsystem
 
