@@ -36,6 +36,20 @@ npm run build
 
 `npm run test` runs the unit suite first, then the Playwright smoke test. The Playwright config builds the static app and serves it with `npm run preview` before launching Chromium, so the smoke exercises the generated SvelteKit output rather than the dev server.
 
+## GitHub Pages Deployment
+
+The production GitHub Pages site is <https://averyanalex.github.io/alkotype/>.
+
+The `CI and Pages` workflow runs `npm run lint`, `npm run check`, `npm run test`, `npm run build`, and `npm run build:pages` for pull requests and pushes to `main`. It uploads the static `build/` artifact and deploys with GitHub Pages Actions only for pushes to `main` or manual workflow dispatch from the `main` branch.
+
+Reproduce the Pages build locally with:
+
+```sh
+npm run build:pages
+```
+
+`npm run build:pages` runs `BASE_PATH=/alkotype vite build`, so generated asset paths are suitable for the repository Pages URL while the normal `npm run build` remains root-based for local preview, Docker, and smoke tests.
+
 After the first install on a machine without Playwright browsers, run:
 
 ```sh
